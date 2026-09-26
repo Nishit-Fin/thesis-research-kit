@@ -34,7 +34,7 @@ brief.yaml  ->  1. search (Exa)  ->  2. read in full (Firecrawl)  ->  3. pack
 
 The script has no AI model in it on purpose: the pack only shows what the pages say. The judgment,
 the market sizing and the writing come after, in Claude, following
-[the research skill](.claude/skills/thesis-research/SKILL.md). That is also how the quantum research
+[the research skill](thesis-research/SKILL.md). That is also how the quantum research
 above was written, with Exa and Firecrawl connected to Claude.
 
 ## Tools
@@ -64,3 +64,10 @@ research/brief.py    loads and checks the brief (unique ids, 6 queries or fewer 
 research/sources.py  Exa search and Firecrawl scrape, with every response cached
 research/pack.py     evidence.md, numbers.csv (with the cross-check), sources.csv
 ```
+
+## Next
+
+- Tenders and government orders (GeM, CPPP, SECI) as their own source, since a tender is the clearest sign a buyer is ready.
+- Research papers through Firecrawl's paper search, to judge how ready a technology really is.
+- Patent and company registry lookups, to check patent counts and headquarters automatically.
+- Weekly alerts on a live thesis (new rounds, new tenders) with Exa Monitors.
