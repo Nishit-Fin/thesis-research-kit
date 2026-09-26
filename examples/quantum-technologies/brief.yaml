@@ -1,0 +1,44 @@
+# A brief is the list of questions the thesis has to answer.
+# Write it before searching. Each question stays narrow, with 6 or fewer queries.
+theme: Quantum technologies in India
+geography: India
+since: "2024-01-01"      # only pages published after this date
+scrape_top: 3            # pages per question read in full with Firecrawl
+
+questions:
+  - id: why-now
+    ask: What deadline or rule makes Indian buyers need quantum-safe security now?
+    queries:
+      - DST roadmap quantum-safe critical sectors deadline 2029 India
+      - India cryptographic bill of materials CBOM mandate FY2027-28
+      - preferential market access Indian quantum products roadmap
+
+  - id: hard-part
+    ask: How far can quantum keys travel over fibre, and what does a satellite change?
+    queries:
+      - fibre quantum key distribution trusted relay distance limit km
+      - satellite quantum key distribution 12,900 km China South Africa Nature 2025
+
+  - id: mission
+    ask: What does the National Quantum Mission fund, and by when?
+    queries:
+      - National Quantum Mission targets qubits 2031 photonic
+      - National Quantum Mission satellite QKD 2,000 km target
+    domains: [dst.gov.in, pib.gov.in]
+
+  - id: supply
+    ask: Which photonics parts does India still import for quantum work?
+    queries:
+      - IISc single photon detector tender domestic suppliers 2025
+      - India photonics components import dependence lasers fibres
+
+  - id: money
+    ask: Who has funded Indian quantum startups in the last two years, and how much?
+    queries:
+      - Indian quantum startup raises seed round 2026
+      - quantum communication startup India pre-seed funding
+
+seed_companies:        # the script also looks for startups similar to these
+  - Pramatra Space
+  - Quanfluence
+  - QNu Labs
