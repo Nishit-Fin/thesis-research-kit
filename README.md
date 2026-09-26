@@ -64,10 +64,3 @@ research/brief.py    loads and checks the brief (unique ids, 6 queries or fewer 
 research/sources.py  Exa search and Firecrawl scrape, with every response cached
 research/pack.py     evidence.md, numbers.csv (with the cross-check), sources.csv
 ```
-
-## Next
-
-- Tenders and government orders (GeM, CPPP, SECI) as their own source, since a tender is the clearest sign a buyer is ready.
-- Research papers through Firecrawl's paper search, to judge how ready a technology really is.
-- Patent and company registry lookups, to check patent counts and headquarters automatically.
-- Weekly alerts on a live thesis (new rounds, new tenders) with Exa Monitors.
