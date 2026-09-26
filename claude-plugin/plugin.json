@@ -1,0 +1,10 @@
+   {
+     "name": "thesis-research-kit",
+     "version": "0.2.0",
+     "description": "Investment research for early-stage VC: thesis research with Exa and Firecrawl, a weekly funding-round radar (pre-seed to Series C), and a sourced due-diligence check covering tenders, patents, research papers, company registry filings, courts and more.",
+     "author": { "name": "Nishit Shaw", "url": "https://github.com/Nishit-Fin" },
+     "homepage": "https://github.com/Nishit-Fin/thesis-research-kit",
+     "repository": "https://github.com/Nishit-Fin/thesis-research-kit",
+     "license": "MIT",
+     "keywords": ["venture-capital", "due-diligence", "investment-research", "exa", "firecrawl", "funding-rounds"]
+   }
