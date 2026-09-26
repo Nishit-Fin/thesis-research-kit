@@ -72,3 +72,46 @@ def firecrawl_scrape(raw_dir: Path, url: str) -> Optional[dict]:
 
     page = _cached(raw_dir / "pages" / f"{_key(url)}.json", fetch)
     return None if page.get("error") else page
+
+
+ROUND_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "company": {"type": "string"},
+        "city": {"type": "string"},
+        "stage": {"type": "string"},
+        "amount": {"type": "string"},
+        "lead_investors": {"type": "array", "items": {"type": "string"}},
+        "other_investors": {"type": "array", "items": {"type": "string"}},
+        "what_it_makes": {"type": "string"},
+        "date_announced": {"type": "string"},
+    },
+}
+
+ROUND_PROMPT = (
+    "Extract the single funding round this article announces. Use only what the page states. "
+    "Leave a field empty if the page does not state it. Never estimate an amount."
+)
+
+
+def firecrawl_round(raw_dir: Path, url: str) -> Optional[dict]:
+    """Read a funding announcement and pull the round's details as structured fields."""
+
+    def fetch():
+        key = os.environ.get("FIRECRAWL_API_KEY")
+        if not key:
+            raise RuntimeError("FIRECRAWL_API_KEY is missing. Add it to .env (see .env.example).")
+        r = requests.post(
+            FIRECRAWL_SCRAPE,
+            headers={"Authorization": f"Bearer {key}"},
+            json={"url": url, "onlyMainContent": True,
+                  "formats": [{"type": "json", "schema": ROUND_SCHEMA, "prompt": ROUND_PROMPT}]},
+            timeout=180,
+        )
+        if r.status_code != 200:
+            return {"url": url, "error": f"{r.status_code}: {r.text[:200]}"}
+        data = r.json().get("data", {})
+        return {"url": url, "round": data.get("json") or data.get("extract") or {}}
+
+    page = _cached(raw_dir / "rounds" / f"{_key(url)}.json", fetch)
+    return None if page.get("error") else page

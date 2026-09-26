@@ -5,6 +5,16 @@ the key lines from each, and every number found, marked by how many different we
 
 I use this before writing any thesis. My quantum technologies research was built this way.
 
+It is also a **Claude plugin** with three skills and an agent:
+
+| Part | What it does |
+|---|---|
+| [thesis-research](skills/thesis-research/SKILL.md) | Brief first, then search with Exa, read in full with Firecrawl, check every number, size the market bottom up |
+| [due-diligence](skills/due-diligence/SKILL.md) | Twelve public-source checks on a startup: company registry, founders, patents, research papers, tenders and government orders (GeM, CPPP, SECI), funding history, financials, traction, courts, licences, competition, adverse media. Each finding is marked Verified, Company says, Conflicting or Not found |
+| [funding-radar](skills/funding-radar/SKILL.md) + [funding-scout agent](agents/funding-scout.md) | Weekly digest of funding rounds from pre-seed to Series C in my sectors, every round linked to its announcement. Runs as a weekly scheduled task |
+
+**Install in Claude:** add this repo as a plugin marketplace (`Nishit-Fin/thesis-research-kit`), or install the `thesis-research-kit.plugin` file. The skills use the Exa and Firecrawl connectors in Claude.
+
 ## Result
 
 | Theme | Brief | Output |
@@ -34,7 +44,7 @@ brief.yaml  ->  1. search (Exa)  ->  2. read in full (Firecrawl)  ->  3. pack
 
 The script has no AI model in it on purpose: the pack only shows what the pages say. The judgment,
 the market sizing and the writing come after, in Claude, following
-[the research skill](thesis-research/SKILL.md). That is also how the quantum research
+[the research skill](skills/thesis-research/SKILL.md). That is also how the quantum research
 above was written, with Exa and Firecrawl connected to Claude.
 
 ## Tools
@@ -51,6 +61,7 @@ above was written, with Exa and Firecrawl connected to Claude.
 pip install -r requirements.txt
 cp .env.example .env        # add EXA_API_KEY and FIRECRAWL_API_KEY
 python run.py --brief briefs/quantum-technologies.yaml
+python radar.py --geography India --sectors "energy storage" quantum photonics   # this week's rounds
 python -m pytest -q         # offline checks, no keys needed
 ```
 
@@ -63,11 +74,12 @@ run.py               one command: brief in, pack out
 research/brief.py    loads and checks the brief (unique ids, 6 queries or fewer per question)
 research/sources.py  Exa search and Firecrawl scrape, with every response cached
 research/pack.py     evidence.md, numbers.csv (with the cross-check), sources.csv
+radar.py             weekly funding radar: Exa search, Firecrawl reads each announcement
+research/radar.py    queries per stage, merging, the digest
+skills/, agents/     the Claude plugin
 ```
 
 ## Next
 
-- Tenders and government orders (GeM, CPPP, SECI) as their own source, since a tender is the clearest sign a buyer is ready.
-- Research papers through Firecrawl's paper search, to judge how ready a technology really is.
-- Patent and company registry lookups, to check patent counts and headquarters automatically.
-- Weekly alerts on a live thesis (new rounds, new tenders) with Exa Monitors.
+- Tender alerts on a live thesis with Exa Monitors, next to the funding radar.
+- A shared watchlist so the radar and due diligence remember the companies I track.
