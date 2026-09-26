@@ -1,0 +1,14 @@
+   {
+     "name": "thesis-research-kit",
+     "owner": { "name": "Nishit Shaw", "url": "https://github.com/Nishit-Fin" },
+     "metadata": { "description": "Investment research plugins for early-stage VC by Nishit Shaw." },
+     "plugins": [
+       {
+         "name": "thesis-research-kit",
+         "source": "./",
+         "description": "Thesis research, a weekly funding-round radar and sourced due diligence for early-stage VC, built on Exa and Firecrawl.",
+         "version": "0.2.0",
+         "license": "MIT"
+       }
+     ]
+   }
